@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 const convertRomanToNumber = {
   I: 1,
@@ -45,14 +43,18 @@ const romanConvert = function (string) {
 };
 
 function App() {
-  const [roman, setRoman] = useState("");
   const [number, setNumber] = useState("0");
   function romanInput(event) {
-    setRoman(event.target.value);
-    if (!romanConvert(roman)) {
-      setNumber("Enter only roman number..");
+    const value = event.target.value;
+    if (value.length !== 0) {
+      const result = romanConvert(value);
+      if (!result) {
+        setNumber("Enter only roman number..");
+      } else {
+        setNumber(String(result));
+      }
     } else {
-      setNumber(String(romanConvert(roman)));
+      setNumber("0");
     }
   }
   return (
